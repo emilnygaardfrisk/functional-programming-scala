@@ -1,5 +1,6 @@
 import scala.annotation.tailrec
 object Chapter2 extends App {
+  // 2.1
   def fib(n: Int): Int = {
     @tailrec
     def go(n: Int, prev: Int, current: Int): Int = {
@@ -11,6 +12,7 @@ object Chapter2 extends App {
   }
   println(fib(19))
 
+  // 2.2
   def isSorted[A](as: Array[A], ordered: (A, A) => Boolean): Boolean = {
     @tailrec
     def go(sorted: Boolean, i: Int): Boolean = {
@@ -23,5 +25,15 @@ object Chapter2 extends App {
   println(isSorted(Array(1, 2, 3, 4), (x: Int,  y: Int) => x < y))
   println(isSorted(Array(4, 3, 2, 1), (x: Int,  y: Int) => x < y))
 
+  // 2.3
+  def curry[A,B,C](f: (A, B) => C): A => (B => C) = 
+    a => b => f(a, b)
 
+  // 2.4
+  def uncurry[A,B,C](f: A => B => C): (A, B) => C =
+    (a, b) => f(a)(b)
+
+  // 2.5
+  def compose[A,B,C](f: B => C, g: A => B): A => C =
+    a => f(g(a))
 }
